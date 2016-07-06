@@ -12,12 +12,13 @@ var outer = function(){
 // Invoke outer saving the return value into another variable called 'inner'.
 
 // Code Here
-
+var inner = outer();
 
 //Once you do that, invoke inner.
 
   //Code Here
 
+inner;
 
 
 //////////////////PROBLEM 2////////////////////
@@ -37,8 +38,13 @@ var callFriend = function(){
 
   //Code Here
 
+function makeCall() {
+  var call = callFriend();
 
+  return call("435-215-9248");
+}
 
+makeCall();
 
 
 
@@ -53,12 +59,21 @@ var callFriend = function(){
 
 //Code Here
 
+function makeCounter() {
+  var counter = 0;
+  function counting() {
+    counter++;
+    return counter;
+  }
+  return counting;
+}
+
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -72,11 +87,17 @@ var callFriend = function(){
 // You will need to use the module pattern to achieve this.
 
 function counterFactory(value) {
-
   // Code here.
 
-
   return {
+    inc: function() {
+      value++;
+      return value;
+    },
+    dec: function() {
+      value--;
+      return value;
+    }
   }
 }
 
@@ -96,11 +117,13 @@ counter = counterFactory(10);
     var welcomeText = 'You\'re doing awesome, keep it up ';
 
     // code message function here.
-
+    function message() {
+      return welcomeText + firstname + " " + lastname + ".";
+    }
 
     //Uncommment this to return the value of your invoked message function
 
-    //return message()
+    return message();
   }
 
   motivation('Billy', 'Bob'); // 'Your doing awesome keep it up Billy Bob
@@ -127,12 +150,15 @@ counter = counterFactory(10);
 
     return {
       // Code here.
+      publicMethod: function() {
+        return privateMethod();
+      }
     };
 
   })();
 
 //Uncomment this after you create your public method
-//   module.publicMethod();
+ module.publicMethod();
 
 
 
@@ -143,13 +169,13 @@ counter = counterFactory(10);
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000)
+    newScope(i);
   }
 
   function newScope(i) {
-    console.log(i)
+    setTimeout(function() {
+      console.log(i);
+    }, i * 1000)
   }
 }
 timeOutCounter();
@@ -161,7 +187,19 @@ timeOutCounter();
 
 //////////////////PROBLEM 8////////////////////
 
-var funcArray = [];
+var funcArray = [function() {
+  return 0;
+}, function() {
+  return 1;
+}, function() {
+  return 2;
+}, function() {
+  return 3;
+}, function() {
+  return 4;
+}, function() {
+  return 5;
+}];
 
 /*
   Make the following code work
